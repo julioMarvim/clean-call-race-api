@@ -1,8 +1,8 @@
 import crypto from "crypto";
 import pgp from "pg-promise";
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config()
 
 export default class AccountService {
 
