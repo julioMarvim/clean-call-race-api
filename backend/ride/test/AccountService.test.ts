@@ -9,7 +9,11 @@ test("Deve retornar um passageiro", async function () {
   }
   const accountService = new AccountService()
   const output = await accountService.signup(input)
-  expect(output.accountId).toBeDefined()
+  const account = await accountService.getAccount(output.accountId)
+  expect(account.account_id).toBeDefined()
+  expect(account.name).toBe(input.name)
+  expect(account.email).toBe(input.email)
+  expect(account.cpf).toBe(input.cpf)
 })
 
 test("Deve retornar um motorista", async function () {
@@ -62,7 +66,7 @@ test("Não deve retornar um passageiro quando o email for invalido", async funct
 test("Não deve retornar um passageiro quando o nome for invalido", async function () {
   const input = {
     name: "Julio",
-    email: `juliomarvim${Math.random()}`,
+    email: `juliomarvim${Math.random()}@mail.com.br`,
     cpf: "03765208094",
     isPassenger: true
   }
@@ -70,13 +74,14 @@ test("Não deve retornar um passageiro quando o nome for invalido", async functi
   await expect(() => accountService.signup(input)).rejects.toThrow(new Error("Invalid name"))
 })
 
-test("Não deve retornar um passageiro quando a conta ja existir", async function () {
+test("Não deve retornar um passageiro quando o email ja foi usado em outra conta", async function () {
   const input = {
-    name: "Julio",
-    email: `juliomarvim${Math.random()}`,
+    name: "Julio Marvim",
+    email: `juliomarvim${Math.random()}@mail.com.br`,
     cpf: "03765208094",
     isPassenger: true
   }
   const accountService = new AccountService()
-  await expect(() => accountService.signup(input)).rejects.toThrow(new Error("Invalid name"))
+  await accountService.signup(input)
+  await expect(() => accountService.signup(input)).rejects.toThrow(new Error("Account already exists"))
 })
