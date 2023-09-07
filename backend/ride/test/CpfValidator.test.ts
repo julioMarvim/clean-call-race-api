@@ -13,7 +13,8 @@ test.each([
 test.each([
   "6711816200",
   "037652080941",
-  "00000000000"
+  "00000000000",
+  ""
 ])
 ("Não deve validar um cpf", function (cpf: string) {
   expect(CpfValidator.validate(cpf)).toBeFalsy()
