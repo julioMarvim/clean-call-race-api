@@ -1,6 +1,6 @@
 export default class CpfValidator{
   
-  static validateCpf (str: string) {
+  static validate (str: string) {
 		if (str !== null) {
 			if (str !== undefined) {
 				if (str.length >= 11 && str.length <= 14){
