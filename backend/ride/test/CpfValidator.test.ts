@@ -1,17 +1,20 @@
 import CpfValidator from "../src/CpfValidator"
 
-test("Deve validar um cpf", function () {
-  expect(CpfValidator.validate("03765208094")).toBeTruthy()
+test.each([
+  "03765208094",
+  "01234567890",
+  "565.486.780-60",
+  "671.181.620-00"
+])
+("Deve validar um cpf", function (cpf: string) {
+  expect(CpfValidator.validate(cpf)).toBeTruthy()
 })
 
-test("Deve validar um cpf com final 00", function () {
-  expect(CpfValidator.validate("67118162000")).toBeTruthy()
-})
-
-test("Deve retornar false para um cpf com menos de 11 caracteres", function () {
-  expect(CpfValidator.validate("6711816200")).toBeFalsy()
-})
-
-test("Deve retornar false para um cpf com mais de 11 caracteres", function () {
-  expect(CpfValidator.validate("037652080941")).toBeFalsy()
+test.each([
+  "6711816200",
+  "037652080941",
+  "00000000000"
+])
+("Não deve validar um cpf", function (cpf: string) {
+  expect(CpfValidator.validate(cpf)).toBeFalsy()
 })
