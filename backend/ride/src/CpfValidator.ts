@@ -1,7 +1,7 @@
 export default class CpfValidator{
   
   static validate (cpf: string) {
-    cpf=cpf.replace('.','').replace('.','').replace('-','').replace(" ","");
+    cpf=cpf.replace(/\D/g, "");
       if (cpf.length !== 11) return false
       if (!cpf.split("").every(c => c === cpf[0])) { 
         let     d1, d2;  
