@@ -84,21 +84,14 @@ export default class AccountService {
 					if (input.email.match(/^(.+)@(.+)$/)) {
 						if (this.validateCpf(input.cpf)) {
 							if (input.isDriver) {
-								if (input.carPlate.match(/[A-Z]{3}[0-9]{4}/)) {
-									await connection.query("insert into race.account (account_id, name, email, cpf, car_plate, is_passenger, is_driver, date, is_verified, verification_code) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)", [accountId, input.name, input.email, input.cpf, input.carPlate, !!input.isPassenger, !!input.isDriver, date, false, verificationCode]);
-									await this.sendEmail(input.email, "Verification", `Please verify your code at first login ${verificationCode}`);
-									return {
-										accountId
-									}
-								} else {
+								if (!input.carPlate.match(/[A-Z]{3}[0-9]{4}/)) {
 									throw new Error("Invalid plate");
 								}
-							} else {
-								await connection.query("insert into race.account (account_id, name, email, cpf, car_plate, is_passenger, is_driver, date, is_verified, verification_code) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)", [accountId, input.name, input.email, input.cpf, input.carPlate, !!input.isPassenger, !!input.isDriver, date, false, verificationCode]);
-								await this.sendEmail(input.email, "Verification", `Please verify your code at first login ${verificationCode}`);
-								return {
-									accountId
-								}
+							} 
+							await connection.query("insert into race.account (account_id, name, email, cpf, car_plate, is_passenger, is_driver, date, is_verified, verification_code) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)", [accountId, input.name, input.email, input.cpf, input.carPlate, !!input.isPassenger, !!input.isDriver, date, false, verificationCode]);
+							await this.sendEmail(input.email, "Verification", `Please verify your code at first login ${verificationCode}`);
+							return {
+								accountId
 							}
 						} else {
 							throw new Error("Invalid cpf");
