@@ -109,7 +109,7 @@ export default class AccountService {
 								}
 							}
 						} else {
-							throw new Error("Invaild cpf");
+							throw new Error("Invalid cpf");
 						}
 					} else {
 						throw new Error("Invalid email");
