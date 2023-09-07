@@ -11,3 +11,7 @@ test("Deve validar um cpf com final 00", function () {
 test("Deve retornar false para um cpf com menos de 11 caracteres", function () {
   expect(CpfValidator.validate("6711816200")).toBeFalsy()
 })
+
+test("Deve retornar false para um cpf com mais de 11 caracteres", function () {
+  expect(CpfValidator.validate("037652080941")).toBeFalsy()
+})
