@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand --no-cache",
     "test:verbose": "jest --passWithNoTests --runInBand",
-    "test:unit": "npm test -- --watch -c jest.config.js",
+    "test:unit": "npm test -- --watch  --coverage -c jest.config.js",
     "test:ci": "npm test -- --coverage"
   },
   "dependencies": {
