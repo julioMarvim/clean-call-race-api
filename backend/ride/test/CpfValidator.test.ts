@@ -1,4 +1,5 @@
 import CpfValidator from "../src/CpfValidator"
+const cpfValidator = new CpfValidator()
 
 test.each([
   "03765208094",
@@ -7,7 +8,7 @@ test.each([
   "671.181.620-00"
 ])
 ("Deve validar um cpf", function (cpf: string) {
-  expect(CpfValidator.validate(cpf)).toBeTruthy()
+  expect(cpfValidator.validate(cpf)).toBeTruthy()
 })
 
 test.each([
@@ -17,5 +18,5 @@ test.each([
   ""
 ])
 ("Não deve validar um cpf", function (cpf: string) {
-  expect(CpfValidator.validate(cpf)).toBeFalsy()
+  expect(cpfValidator.validate(cpf)).toBeFalsy()
 })
