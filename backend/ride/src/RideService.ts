@@ -8,10 +8,12 @@ export default class RideService{
     this.accountService = accountService
   }
   
-  request(input: any): any {
+  async request(input: any) {
+    const {is_passenger} = await this.accountService.getAccount(input.passengerId)
+    if(!is_passenger) throw new Error("This user is not a passenger")
     const rideId = crypto.randomUUID()
     return {
       rideId
     }
-  }
+  } 
 }
