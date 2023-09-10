@@ -22,7 +22,6 @@ test("Deve solicitar uma corrida", async function() {
 })
 
 test("Quando o solicitante não for um passageiro deve retornar um erro", async function() {
-
   const driverRequest = {
     name: "Julio Marvim",
     email: `juliomarvim${Math.random()}@mail.com.br`,
