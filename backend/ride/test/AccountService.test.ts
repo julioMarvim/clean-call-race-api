@@ -1,4 +1,4 @@
-import AccountService from "../../src/service/AccountService"
+import AccountService from "../src/AccountService"
 
 test("Deve retornar um passageiro", async function () {
   const input = {
