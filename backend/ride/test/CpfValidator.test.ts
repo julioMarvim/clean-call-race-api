@@ -1,4 +1,6 @@
 import CpfValidator from "../src/CpfValidator"
+
+
 const cpfValidator = new CpfValidator()
 
 test.each([
